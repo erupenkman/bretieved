@@ -31,7 +31,7 @@ app.configure(function(){
 	
 	app.use(express.static(__dirname));
 	app.engine('html', require('ejs').renderFile);
-	//mongoose.connect('mongodb://localhost/test');
+	mongoose.connect( process.env.MONGOLAB_URI || 'mongodb://localhost/test');
 });
 
 app.configure('development', function(){
@@ -44,7 +44,6 @@ app.get('/', function(req, res){
 //post to item adds by default
 app.post('/add', function(req, res){
 	console.log(req.body);
-	/*
 	//todo: only add to the database if it is indexed by elasticsearch and vice versa
 	var item = new Item({ name: req.body.name, detail: req.body.detail});
 	item.save(
@@ -54,6 +53,9 @@ app.post('/add', function(req, res){
 				console.log(err);
 			}
 			else{	
+					res.json( {dbId: item._id});
+					res.end();
+	/*
 				var commands = [];
 				var _index = 'item';
 				var _type = 'document';
@@ -67,24 +69,25 @@ app.post('/add', function(req, res){
 				elasticSearchClient.bulk(commands, {})
 					.on('data', function (data) {
 						console.log('adding');
-						res.json( {dbId: item._id});
-						res.end();
 					})
 					.on('error', function (error) {
 						console.log(error);
+						//res.json( {dbId: item._id});
+						//res.end();
+
 						//roll back DB transaction
 						//notify user
 					})
 					.exec();
+					*/
 			}
 		} 
-	);*/
+	);
 });
 
 app.put('/items/:dbId', function(req, res){
 	console.log('saves');
 
-	/*
 	Item.findById(req.params.dbId, function (error, item) {
 		if(!error){
 		item.name = req.body.name;
@@ -92,6 +95,9 @@ app.put('/items/:dbId', function(req, res){
 			item.save(function (err) {
 				if (!err) {
 					console.log("updated");
+							res.json( {dbId: item._id});
+							res.end();
+	/*
 					var commands = [];
 					var _index = 'item';
 					var _type = 'document';
@@ -112,7 +118,7 @@ app.put('/items/:dbId', function(req, res){
 							console.log(error);
 							//roll back DB transaction
 							//notify user
-						}).exec();
+						}).exec();*/
 				} else {
 					console.log(err);
 				}
@@ -121,28 +127,28 @@ app.put('/items/:dbId', function(req, res){
 		else{
 			console.log(error);
 		}
-	});*/
+	});
 });
 
 app.get('/items/:dbId', function(req, res){
-	/*Item.findById(req.params.dbId, function (err, item) {
+	Item.findById(req.params.dbId, function (err, item) {
 		if (!err) {
 			res.send(item);
 		} else {
 			console.log(err);
 		}
-	});*/
+	});
 });
 
 app.get('/items', function(req, res){
 console.log('get all');
-	/*Item.find({},function (err, items) {
+	Item.find({},function (err, items) {
 		if (!err) {
 			res.send(items);
 		} else {
 			console.log(err);
 		}
-	});*/
+	});
 });
 
 
