@@ -5,9 +5,9 @@
 
 ;// the console of awesome
 var express = require('express'),
-  logger = require('node-codein'),
   http = require('http'),
-  path = require('path'),
+  path = require('path');/*,
+  logger = require('node-codein'),
   ElasticSearchClient = require('elasticsearchclient');
 var mongoose = require('mongoose');
 var Item = mongoose.model('Item', {name: String, detail: [], created : { type : Date, default: Date.now } });
@@ -18,7 +18,7 @@ var serverOptions = {
 };
 
 var elasticSearchClient = new ElasticSearchClient(serverOptions);
-
+*/
 var app = express();
 
 //remember mongoJs is different from mongoose
@@ -26,14 +26,12 @@ var app = express();
 app.configure(function(){
 	app.set('port', process.env.PORT || 3000);
 	app.set('views', __dirname);
-	//app.use(express.logger('dev'));
 	app.use(express.bodyParser());
 	app.use(express.methodOverride());
 	
 	app.use(express.static(__dirname));
 	app.engine('html', require('ejs').renderFile);
-	//app.set('view engine', '');
-	mongoose.connect('mongodb://localhost/test');
+	//mongoose.connect('mongodb://localhost/test');
 });
 
 app.configure('development', function(){
@@ -46,7 +44,7 @@ app.get('/', function(req, res){
 //post to item adds by default
 app.post('/add', function(req, res){
 	console.log(req.body);
-	
+	/*
 	//todo: only add to the database if it is indexed by elasticsearch and vice versa
 	var item = new Item({ name: req.body.name, detail: req.body.detail});
 	item.save(
@@ -80,13 +78,13 @@ app.post('/add', function(req, res){
 					.exec();
 			}
 		} 
-	);
+	);*/
 });
 
 app.put('/items/:dbId', function(req, res){
 	console.log('saves');
 
-	
+	/*
 	Item.findById(req.params.dbId, function (error, item) {
 		if(!error){
 		item.name = req.body.name;
@@ -123,28 +121,28 @@ app.put('/items/:dbId', function(req, res){
 		else{
 			console.log(error);
 		}
-	});
+	});*/
 });
 
 app.get('/items/:dbId', function(req, res){
-	Item.findById(req.params.dbId, function (err, item) {
+	/*Item.findById(req.params.dbId, function (err, item) {
 		if (!err) {
 			res.send(item);
 		} else {
 			console.log(err);
 		}
-	});
+	});*/
 });
 
 app.get('/items', function(req, res){
 console.log('get all');
-	Item.find({},function (err, items) {
+	/*Item.find({},function (err, items) {
 		if (!err) {
 			res.send(items);
 		} else {
 			console.log(err);
 		}
-	});
+	});*/
 });
 
 
