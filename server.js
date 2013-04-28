@@ -31,7 +31,9 @@ app.configure(function(){
 	
 	app.use(express.static(__dirname));
 	app.engine('html', require('ejs').renderFile);
-	mongoose.connect( process.env.MONGOLAB_URI || 'mongodb://localhost/test');
+	var mongoURL = process.env.MONGOLAB_URI || 'mongodb://localhost/test';
+	console.log(mongoURL);
+	mongoose.connect( mongoURL);
 });
 
 app.configure('development', function(){
