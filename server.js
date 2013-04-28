@@ -8,17 +8,17 @@ var express = require('express'),
   http = require('http'),
   path = require('path'),
   logger = require('node-codein');//,
-  //ElasticSearchClient = require('elasticsearchclient');
+  ElasticSearchClient = require('elasticsearchclient');
 var mongoose = require('mongoose');
 var Item = mongoose.model('Item', {name: String, detail: [], created : { type : Date, default: Date.now } });
-/*
+
 var serverOptions = {
     host: 'localhost',
     port: 9200
 };
 
 var elasticSearchClient = new ElasticSearchClient(serverOptions);
-*/
+
 var app = express();
 
 //remember mongoJs is different from mongoose
@@ -55,9 +55,7 @@ app.post('/add', function(req, res){
 				console.log(err);
 			}
 			else{	
-					res.json( {dbId: item._id});
-					res.end();
-	/*
+					
 				var commands = [];
 				var _index = 'item';
 				var _type = 'document';
@@ -74,14 +72,14 @@ app.post('/add', function(req, res){
 					})
 					.on('error', function (error) {
 						console.log(error);
-						//res.json( {dbId: item._id});
-						//res.end();
+						res.json( {dbId: item._id});
+						res.end();
 
 						//roll back DB transaction
 						//notify user
 					})
 					.exec();
-					*/
+					
 			}
 		} 
 	);
@@ -97,9 +95,8 @@ app.put('/items/:dbId', function(req, res){
 			item.save(function (err) {
 				if (!err) {
 					console.log("updated");
-							res.json( {dbId: item._id});
-							res.end();
-	/*
+							
+	
 					var commands = [];
 					var _index = 'item';
 					var _type = 'document';
@@ -120,7 +117,7 @@ app.put('/items/:dbId', function(req, res){
 							console.log(error);
 							//roll back DB transaction
 							//notify user
-						}).exec();*/
+						}).exec();
 				} else {
 					console.log(err);
 				}
