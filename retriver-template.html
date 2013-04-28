@@ -1,0 +1,84 @@
+<html>
+	<title> Retriver Data Template
+	</title>
+	<head>
+	<link rel="stylesheet" href="CSS/retriver.css"></link>
+	
+	<script language="javascript" type="text/javascript" src="js/lib/jquery-1.8.0.min.js"></script> 
+	<script language="javascript" type="text/javascript" src="js/lib/mustache.js"></script> 
+	<script language="javascript" type="text/javascript" src="js/retriver.js"></script> 
+	<script id="person-tpl" type="text/template">
+		<li id="{{domId}}">
+			<img src="img/00{{img}}.jpg">
+			<div id="name-{{domId}}" class="listlabel" title="{{name}}">{{name}}</div>
+		</li>
+	</script>
+	<script id="person-details-tpl" type="text/template">
+		<input value="{{value}}"/>
+	</script>
+	</head>
+	<body>
+		<div id="canvas">
+			<div id="listofprofile">
+				<div id="search">
+					<ul>
+						<li> <input id="search_input" type="text" value=""> </li>
+						<li> <div id="search_data"> <img src="img/search.gif"> </div> </li>
+						<li> <div id="add-new"> <img src="img/add.gif"> </div> </li>
+					</ul>
+				</div>
+				<div id="listbox">
+				<ul id="listboxul">
+					<!--<a href="#" id="add-new-list" class="big-button" >Add</a>-->
+				</ul>
+			</div>
+			</div>
+			<div id="profile">
+				<div id="profile-loading">
+				</div>
+				<div id="profileid">
+					<input id="name" value="" placeholder="New contact"/>
+				</div>
+				<div id="type"> 
+					<img src="img/00.jpg">
+					<div id="type1">
+					</div>
+					<div id="type2">
+						<a href="index.php"> <h5> Client </h5> </a>
+					</div>
+				</div>
+				<div id="textarea"><!--
+					 <textarea> 
+					 </textarea>-->
+				</div>
+				<div id="edit-details">
+					<div id="details">
+						<input/>
+						<input/>
+						<input/>
+						<input/>
+						<input/>
+						<input/>
+						<input/>
+						<input/>
+						<input/>
+						<input/>
+						<input/>
+						<input/>
+						<input/>
+						<input/>
+						<input/>
+						<input/>
+						<input/>
+						<input/>
+						<input/>
+						<input/>
+					</div>
+					<div class="buttons">
+						<a href="#" id="save-button" class="big-button" >Save</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
