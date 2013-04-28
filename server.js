@@ -6,12 +6,12 @@
 ;// the console of awesome
 var express = require('express'),
   http = require('http'),
-  path = require('path');/*,
-  logger = require('node-codein'),
-  ElasticSearchClient = require('elasticsearchclient');
+  path = require('path'),
+  logger = require('node-codein');//,
+  //ElasticSearchClient = require('elasticsearchclient');
 var mongoose = require('mongoose');
 var Item = mongoose.model('Item', {name: String, detail: [], created : { type : Date, default: Date.now } });
-
+/*
 var serverOptions = {
     host: 'localhost',
     port: 9200
