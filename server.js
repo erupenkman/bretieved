@@ -4,17 +4,20 @@
  */
 
 ;// the console of awesome 
+
 var express = require('express'),
   logger = require('node-codein'),
   http = require('http'),
   path = require('path'),
+  url = require('url'),
   ElasticSearchClient = require('elasticsearchclient');
 var mongoose = require('mongoose');
 var Item = mongoose.model('Item', {name: String, detail: [], created : { type : Date, default: Date.now } });
-
+var serverUrl =  url.parse(process.env.SEARCHBOX_URL || 'http://localhost:9200');
+console.log(serverUrl);
 var serverOptions = {
-    host: 'localhost',
-    port:  url.parse(process.env.SEARCHBOX_URL) || 9200
+    host: serverUrl.hostname,
+    port:  serverUrl.port
 };
 
 var elasticSearchClient = new ElasticSearchClient(serverOptions);
