@@ -1,17 +1,19 @@
+
 body {
-	background-color: #E0E0E0;
+background-image: url("../img/sand.jpg");
 }
-#canvas {
-	height: 550px;
-	width: 860px;
-	margin: 50px auto;
-	border-radius: 5px;
-	background-image: url("/img/rock.jpg");
-	box-shadow: 0 1px 4px #C1CDCD;
-}
+
 #search{
-	background-color: #9D9D9D;
-	height: 55px;
+	height: 200px;
+	position: absolute;
+	width: 1200px;
+	top: 0;
+	margin: 20px 100px 0 350px;
+	float: right;	
+	background-image: url("../img/vally.jpg");
+	background-size: cover;
+    background-repeat: no-repeat;
+
 }		
 #search ul li {
 	float: left;
@@ -21,23 +23,23 @@ body {
 }
 #search ul {
 	list-style-type: none;
-	margin: 0;
-	padding: 0;
+	margin: 100px 50px 10px 20px;
+	float: right;
 }
 #search img {
 	float: right;
 	height: 25px;
-	margin:  10px auto;
+	margin:  5px auto;
 	padding-left: 5px;
 	padding-right: 5px;
-	background-color: #818181;
+	background-color: grey;
 	box-shadow: 0 1px 1px  #595959;
 	padding: 4px 12px 4px 12px;
 }
 #search img:hover {
 	float: right;
 	height: 25px;
-	margin:  10px auto;
+	margin:  5px auto;
 	padding-left: 5px;
 	padding-right: 5px;
 	background-color: #636363;
@@ -45,19 +47,25 @@ body {
 	padding: 4px 12px 4px 12px;
 }
 #search_input {
-	background-color: #F0F0F0;
+	background-color: #F5F5F5;
 	border-radius: 2px 0px 0px 2px;
 	border-style: none;
 	box-shadow: 0 1px 1px #616161;
 	font-size: 18px;
 	height: 33px;
-	margin: 10px 0 10px 18px;
+	margin: 5px 0 5px 5px;
 	padding: 5px;
-	width: 245px;
+	width: 300px;
+}
+#body {
+	width:  1100px;
+	margin: 85px 200px 50px 400px;
+	position: relative;
 }
 #listofprofile {
-	float: left;
-	width: 370px;
+	float: right;
+	width: 398px;
+	margin-top: 150px;
 }
 hr {
 	border-width: 0.05px;
@@ -66,19 +74,18 @@ hr {
 }
 .listlabel {
 	height: 50px;	
-	width: 235px;
+	width: 230px;
 	font: lighter 16px Arial, sans-serif;
 	text-shadow: 1px 1px white;
 	position: relative;	
-	background-color: #EFEFEF;
+	background-color: #DBDBDB;
 	float: right;
 	margin-bottom: 10px;
 	padding: 5px;
-	box-shadow: 1px 1px 1px #CFCFCF;
 }
-#listboxul li:hover .listlabel {
+#listboxul li:hover .listlabel, #listboxul li.selected .listlabel  {
 	height: 50px;	
-	width: 235px;
+	width: 230px;
 	font: lighter 16px Arial, sans-serif;
 	text-shadow: 1px 1px white;
 	position: relative;	
@@ -86,25 +93,21 @@ hr {
 	float: right;
 	margin-bottom: 10px;
 	padding: 5px;
-	box-shadow: 1px 1px 1px #CFCFCF;
+	box-shadow: 0 0 3px black;
 }
 #listbox {
-	height: 495px;
-	margin: 0 0px 0 15px ;
+	height: 540px;
 	overflow: auto;
-	padding-right: 15px;
+	padding: 10px 10px 10px 0px;
 }
 #listboxul {
 	list-style-type: none;
 	padding: 0;
-	margin-top: 20px;
+	width: 300px;
 }
 
 #listboxul li{
 	overflow: hidden;
-}
-
-#listboxul li:hover{
 }
 
 #listboxul img {
@@ -112,29 +115,30 @@ hr {
 	height: 60px;
 	float: left;
 	margin-bottom: 10px;
-	box-shadow: 1px 1px 1px grey;
-	opacity: 0.8;
+	opacity: 0.5;
 	overflow: hidden;
 }
-#listboxul li:hover img {
+#listboxul li:hover img, #listboxul li.selected img {
 	width: 60px;
 	height: 60px;
 	float: left;
 	margin-bottom: 10px;
-	box-shadow: 1px 1px 1px grey;
 	opacity: 1;
+	box-shadow: 0 0 9px black;
 }
 #profile{
-	height: 550px;
-	width: 490px;
+	height: 700px;
+	width: 600px;
 	background-color: #ECF1EF;
-	float: right;
-	box-shadow: 0 0 5px SlateGrey;
+	float: left;
+	box-shadow: 0 0 10px SlateGrey;
+	border-radius: 3px;
+	border: 20px solid white;
 }
 #profile-loading{
 	position:absolute;
-	height: 550px;
-	width: 490px;
+	height: 600px;
+	width: 550px;
 	background:  url('../img/spinner-small.gif') no-repeat center center white;
 	z-index:1;
 	opacity: .5;
@@ -148,19 +152,20 @@ hr {
 }
 #profileid {
 	background-color: darkslategray;
-    height: 80px;
-    width: 490px;
+    height: 60px;
+    width: 600px;
 	position: absolute;
+	border-radius: 5px 5px 0 0;
 }
 #name {
-	color: #C5C5C5;
+	color: #F5F5F5;
     float: right;
     font-family: Arial,sans-serif;
-    font-size: 22px;
-    margin-right: 5px;
-    padding: 5px;
-    width: 335px;
-	margin-top: 15px;
+    font-size: 24px;
+    margin-right: 30px;
+    padding: 10px 5px 2px 10px;
+    width: 420px;
+	margin-top: 2px;
 }
 #type {
 	position: absolute;
@@ -184,7 +189,7 @@ hr {
 h5 {
 	margin: 0;
 	padding: 2px;
-	font-family: sans-serif;
+	font-family: caption;
 	text-align: center;
 }
 a {
@@ -202,6 +207,16 @@ a {
 	margin-left: 15px;
 
 }
+#profilelables {
+	float: left;
+	height: 480px;
+	width: 120px;
+	padding: 0 5px 5px 15px;
+	margin-top: 148px;
+}
+#profilelables input {
+	width: 110px;
+}
 textarea {
 	height: 57px;
 	width: 320px;
@@ -213,7 +228,7 @@ textarea {
     height: 50px;
     margin: 80px 15px 0;
     padding: 5px;
-    width: 320px;
+    width: 350px;
 }
 
 #textarea input {
@@ -223,7 +238,7 @@ textarea {
 	height: 330px;
 }
 #edit-details input {
-	width: 223px;
+	width: 205px;
 }
 
 input {
@@ -236,8 +251,7 @@ input {
 	background-color: transparent;
     float: right;
     height: 365px;
-    margin: 0 10px;
-    padding: 10px;
+    margin-top: 78px;
     width: 450px;
 }
 .buttons {

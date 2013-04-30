@@ -32,20 +32,15 @@ $(document).ready( function(){
 	getItems();
 	$('#profile-loading').hide();
 	
-	$('#add-new-list').click(function(){
-		showItem('',new Array(NUM_FIELDS));
-		openPerson = undefined;
-	});
-	
 	$('#add-new').click( function(){
 		startSpinner();
 		showItem('',new Array(NUM_FIELDS));
+		//unselect whatever item was selected
+		setSelected(null);
 		openPerson = undefined;
 		stopSpinner();
 	});
 	
-	//these two lines add a new person to the list.
-	//copy and paste these two lines and change the name, it will add someone else to the list.
 	$('#save-button').click(function(){
 		var allValues = [];
 		$('#details input').each(function() { allValues.push($(this).val()) });
@@ -61,6 +56,9 @@ $(document).ready( function(){
 				console.log(res.dbId);
 				//indicate that save has happened
 				var newPerson = new Person(res.dbId, newName);
+				$('#' + newPerson.domId).ready( function(){
+					setSelected(newPerson.domId);
+				});
 				openPerson = newPerson;
 			});
 		}
@@ -90,6 +88,7 @@ function getItems(){
 	}); 
 }
 function showItem(name, details){
+
 	$('#details').empty();
 	for(i=0; i< details.length; i++){
 		var template = $('#person-details-tpl').html();
@@ -114,6 +113,7 @@ function editItem(person){
 		},
 		success: function (res) {
 			showItem(res.name, res.detail);
+			setSelected(person.domId);
 			openPerson = person;
 		} ,
 		error: function(res){
@@ -176,6 +176,10 @@ function addItem(name, detail, onSuccess){
 	});  
 }
 
+function setSelected(domId){
+	$('#listboxul li').removeClass('selected');
+	$('#' + domId).addClass('selected');
+}
 
 Person = function(id, name){
 	this.dbId = id;
