@@ -22,6 +22,9 @@ var serverOptions = {
 
 var elasticSearchClient = new ElasticSearchClient(serverOptions);
 
+	var _index = 'item';
+	var _type = 'document';
+	
 var app = express();
 
 //remember mongoJs is different from mongoose
@@ -99,8 +102,6 @@ app.put('/items/:dbId', function(req, res){
 					res.end();
 					
 					var commands = [];
-					var _index = 'item';
-					var _type = 'document';
 					commands.push({ 
 						"index":{
 							"_index":_index, 
@@ -149,6 +150,27 @@ console.log('get all');
 	});
 });
 
+app.get('/search/:query', function(req, res){
+console.log(req.params.query);
+//note this is failing
+	var qryObj = {
+        "match_all" : {}
+	}
+	elasticSearchClient.search(_index, _type, qryObj)
+		.on('data', function(data) {
+			console.log(JSON.parse(data))
+			res.json(data);
+			res.end();
+		})
+		.on('done', function(){
+			//always returns 0 right now
+		})
+		.on('error', function(error){
+			console.log(error)
+		})
+		.exec();
+	
+});
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server now listening on port " + app.get('port'));

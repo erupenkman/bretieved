@@ -1,29 +1,26 @@
 
 body {
-background-image: url("../img/sand.jpg");
+	background-image: url("../img/sand.jpg");
 }
 
-#search{
-	height: 200px;
-	position: absolute;
-	width: 1200px;
-	top: 0;
-	margin: 20px 100px 0 350px;
-	float: right;	
+#background{
+	height: 150px;
+	margin: 0 auto 20px 0;
 	background-image: url("../img/vally.jpg");
 	background-size: cover;
     background-repeat: no-repeat;
 
 }		
-#search ul li {
+#search li {
 	float: left;
 }	
 #search a {
 	text-decoration: none;
 }
-#search ul {
+#search {
 	list-style-type: none;
-	margin: 100px 50px 10px 20px;
+	margin: 0;
+	padding:0;
 	float: right;
 }
 #search img {
@@ -59,13 +56,14 @@ background-image: url("../img/sand.jpg");
 }
 #body {
 	width:  1100px;
-	margin: 85px 200px 50px 400px;
+	margin: 0 auto 50px auto;
+	padding-left:50px;
 	position: relative;
+	top: -120px;
 }
 #listofprofile {
 	float: right;
-	width: 398px;
-	margin-top: 150px;
+	width: 403px;
 }
 hr {
 	border-width: 0.05px;
@@ -97,8 +95,10 @@ hr {
 }
 #listbox {
 	height: 540px;
+	width: 100%;
 	overflow: auto;
-	padding: 10px 10px 10px 0px;
+	margin-top: 100px;
+	padding: 10px 0 0 0;
 }
 #listboxul {
 	list-style-type: none;
@@ -127,7 +127,7 @@ hr {
 	box-shadow: 0 0 9px black;
 }
 #profile{
-	height: 700px;
+	height: 610px;
 	width: 600px;
 	background-color: #ECF1EF;
 	float: left;
@@ -234,9 +234,6 @@ textarea {
 #textarea input {
 	width: 300px;
 }
-#details{
-	height: 330px;
-}
 #edit-details input {
 	width: 205px;
 }
@@ -250,12 +247,11 @@ input {
 #edit-details {
 	background-color: transparent;
     float: right;
-    height: 365px;
     margin-top: 78px;
     width: 450px;
 }
 .buttons {
-	padding:10px 0;
+	padding:20px 0;
 }
 .big-button{
 	-moz-box-shadow: inset 0px 1px 0px 0px #818181;
