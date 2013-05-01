@@ -137,8 +137,8 @@ hr {
 }
 #profile-loading{
 	position:absolute;
-	height: 600px;
-	width: 550px;
+	height: 610px;
+	width: 600px;
 	background:  url('../img/spinner-small.gif') no-repeat center center white;
 	z-index:1;
 	opacity: .5;
