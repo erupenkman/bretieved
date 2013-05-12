@@ -2,6 +2,16 @@ var peopleArray = new Array();
 var personDomId = 1;
 var openPerson;
 var NUM_FIELDS = 30;
+
+
+
+
+/*********/
+
+
+
+
+
 /** Only works with dbId*/
 Array.prototype.containsPerson = function ( openPerson ) {
 	if(openPerson === undefined || openPerson.domId === undefined){
