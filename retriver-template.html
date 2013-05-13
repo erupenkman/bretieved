@@ -19,9 +19,9 @@
 
 	<!--<script language="javascript" type="text/javascript" src="js/views/item-row.js"></script> -->
 	<script id="row-tpl" type="text/template">
-		<li id="{{domId}}">
+		<li id="{{id}}">
 			<img src="img/00{{img}}.jpg">
-			<div id="name-{{domId}}" class="listlabel" title="{{name}}">{{name}}</div>
+			<div id="name-{{id}}" class="listlabel" title="{{name}}">{{name}}</div>
 		</li>
 	</script>
 	<!-- #details identifies the array {{.}} is an item in the array -->
@@ -103,21 +103,34 @@
 		<script language="javascript" type="text/javascript" >
 	/*go backbone go*/
 var notes = new APP.Collections.NoteCollection();
-var router = new APP.Routers.NoteRouter({notes: notes});
-
-Backbone.history.start();
 // we manually pass in the initial data, but this would be called with a collection.fetch() normally
 notes.reset([
 	{
-		"name": "Example Note 1",
-		"domId": "45",
+		"name": "Example Note 0",
+		"id": "0",
 		"detail": ["David Morrow", "galen"]
 	},
 	{
-		"name": "Example Note 2",
-		"domId": "48",
+		"name": "Example Note 1",
+		"id": "1",
 		"detail": ["David", "Morrow"]
 	}
 ]);
+var router = new APP.Routers.NoteRouter({notes: notes});
+
+notes.reset([
+	{
+		"name": "Example Note 0",
+		"id": "0",
+		"detail": ["David Morrow", "galen"]
+	},
+	{
+		"name": "Example Note 1",
+		"id": "1",
+		"detail": ["David", "Morrow"]
+	}
+]);
+Backbone.history.start();
+
 	</script>
 </html>
