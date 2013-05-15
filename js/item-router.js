@@ -8,18 +8,22 @@
   APP.Routers.NoteRouter = Backbone.Router.extend({
     routes: {
 		"note/new": "create",
-		"note/:id/edit": "edit"
+		"note/:id/edit": "edit",
+		"*path": "create" //default
     },
 
     initialize: function (options) {
-		this.notes = options.notes;
-		this.create();
+		this.notes =  new APP.Collections.NoteCollection();
+		this.notes.fetch({success: (function(){
+			Backbone.history.start();
+			this.list = new APP.Views.NoteListView({notes: this.notes});
+			this.list.render();
+		}).bind(this)});
     },
 	
     create: function () {
 		// two views are managed here
 		this.currentView = new APP.Views.NoteNewView({notes: this.notes, note: new APP.Models.NoteModel()});
-		this.list = new APP.Views.NoteListView({notes: this.notes});
 		$('#primary-content').html(this.currentView.render().el);
     },
 

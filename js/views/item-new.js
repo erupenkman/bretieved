@@ -24,18 +24,19 @@
 		$('#details input').each(function() { allValues.push($(this).val()) })
 		// update our model with values from the form
 		this.note.set({
-		id: 2,
-		name: $('#name').val(),
-		detail: allValues
+			name: $('#name').val(),
+			detail: allValues
 		});
+		this.notes.add(this.note);
 		// we would save to the server here with 
-		// this.note.save();
+		this.note.save(null, {success: function(obj) {
+			console.log(obj);
+			window.location.hash = "note/"+ obj.id +"/edit";
+		}});
 		// which would return it with an id, so we fake it and just set it
 		// redirect back to the index
 
 		// add it to the collection
-		this.notes.add(this.note);
-		window.location.hash = "note/"+ this.note.id +"/edit";
     },
 
     // populate the html to the dom

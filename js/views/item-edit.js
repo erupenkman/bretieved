@@ -27,7 +27,7 @@
         detail: allValues
       });
       // we would save to the server here with 
-      // this.note.save();
+      this.note.save();
       // redirect back to the index
     },
 

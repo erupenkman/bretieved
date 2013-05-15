@@ -6,8 +6,7 @@
 
   window.APP = APP || {Routers: {}, Collections: {}, Models: {}, Views: {}};
   APP.Models.NoteModel = Backbone.Model.extend({
-    // the root of the post params
-    paramRoot: "note",
+	url:"/items", 
     // the default fields
     defaults: {
       name: "Untitled",
@@ -22,6 +21,7 @@
   window.APP.Collections = window.APP.Collections || {};
   window.APP.Collections.NoteCollection = Backbone.Collection.extend({
     // Reference to this collection's model.
+	url:"/items",
     model: APP.Models.NoteModel
   });
 }());

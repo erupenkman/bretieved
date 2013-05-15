@@ -15,14 +15,13 @@
 
     // populate the html to the dom
     render: function () {
-      this.$el.html($('#indexTemplate').html());
       this.addAll();
       return this;
     },
 
     addAll: function () {
       // clear out the container each time you render index
-      this.$el.find('tbody').children().remove();
+	  $('#listboxul').html(" ");
       _.each(this.notes.models, $.proxy(this, 'addOne'));
     },
 

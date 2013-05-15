@@ -102,35 +102,11 @@
 	</body>
 		<script language="javascript" type="text/javascript" >
 	/*go backbone go*/
-var notes = new APP.Collections.NoteCollection();
 // we manually pass in the initial data, but this would be called with a collection.fetch() normally
-notes.reset([
-	{
-		"name": "Example Note 0",
-		"id": "0",
-		"detail": ["David Morrow", "galen"]
-	},
-	{
-		"name": "Example Note 1",
-		"id": "1",
-		"detail": ["David", "Morrow"]
-	}
-]);
-var router = new APP.Routers.NoteRouter({notes: notes});
 
-notes.reset([
-	{
-		"name": "Example Note 0",
-		"id": "0",
-		"detail": ["David Morrow", "galen"]
-	},
-	{
-		"name": "Example Note 1",
-		"id": "1",
-		"detail": ["David", "Morrow"]
-	}
-]);
-Backbone.history.start();
+var router = new APP.Routers.NoteRouter();
+
+
 
 	</script>
 </html>

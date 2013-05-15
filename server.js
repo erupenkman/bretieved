@@ -11,8 +11,24 @@ var express = require('express'),
   path = require('path'),
   url = require('url'),
   ElasticSearchClient = require('elasticsearchclient');
-var mongoose = require('mongoose');
-var Item = mongoose.model('Item', {name: String, detail: [], created : { type : Date, default: Date.now } });
+var mongoose = require('mongoose'),
+  Schema = mongoose.Schema;
+
+var ItemSchema = new Schema({
+	name: String, 
+	detail: [], 
+	created : { type : Date, default: Date.now } 
+});
+var Item = mongoose.model('Item', ItemSchema);
+ItemSchema.virtual('id').get(function(){
+    return this._id.toHexString();
+});
+
+// Ensure virtual fields are serialised.
+ItemSchema.set('toJSON', {
+    virtuals: true
+});
+
 var serverUrl =  url.parse(process.env.SEARCHBOX_URL || 'http://localhost:9200');
 console.log(serverUrl);
 var serverOptions = {
@@ -51,7 +67,7 @@ app.get('/', function(req, res){
 	res.render('retriver-template.html');
 });
 //post to item adds by default
-app.post('/add', function(req, res){
+app.post('/items', function(req, res){
 	console.log(req.body);
 	
 	//todo: only add to the database if it is indexed by elasticsearch and vice versa
@@ -63,7 +79,7 @@ app.post('/add', function(req, res){
 				console.log(err);
 			}
 			else{	
-				res.json( {dbId: item._id});
+				res.json( {"id":item._id});
 				res.end();
 				
 				var commands = [];
@@ -90,8 +106,10 @@ app.post('/add', function(req, res){
 	);
 });
 
-app.put('/items/:dbId', function(req, res){
-	Item.findById(req.params.dbId, function (error, item) {
+//update the item with json contained in the request body
+app.put('/items', function(req, res){
+	var id = req.body.id;
+	Item.findById(id, function (error, item) {
 		if(!error){
 		item.name = req.body.name;
 			item.detail = req.body.detail;
@@ -132,7 +150,7 @@ app.put('/items/:dbId', function(req, res){
 app.get('/items/:dbId', function(req, res){
 	Item.findById(req.params.dbId, function (err, item) {
 		if (!err) {
-			res.send(item);
+			res.send(item.toClient());
 		} else {
 			console.log(err);
 		}
@@ -140,7 +158,6 @@ app.get('/items/:dbId', function(req, res){
 });
 
 app.get('/items', function(req, res){
-console.log('get all');
 	Item.find({},function (err, items) {
 		if (!err) {
 			res.send(items);
