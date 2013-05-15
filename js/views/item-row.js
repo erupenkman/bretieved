@@ -4,7 +4,7 @@
 (function () {
   "use strict";
   window.APP = window.APP || {Routers: {}, Collections: {}, Models: {}, Views: {}};
-  APP.Views.NoteRowView = Backbone.View.extend({
+  APP.Views.personRowView = Backbone.View.extend({
     // the wrapper defaults to div, so only need to set this if you want something else
     // like in this case we are in a table so a tr
     tagName: "tr",
@@ -17,14 +17,22 @@
     // the constructor
     initialize: function (options) {
       // model is passed through
-      this.note  = options.note;
-      this.notes = options.notes;
-	  this.note.bind('change', this.render, this);
+      this.person  = options.person;
+      this.persons = options.persons;
+	  this.person.bind('change', this.render, this);
+	  this.person.bind('request', this.ajaxStart, this);
+	  this.person.bind('sync', this.ajaxComplete, this);
     },
-
+	ajaxStart: function(arg1,arg2,arg3){
+		//start spinner
+		$('#row-loading-'+this.person.id).fadeIn({duration:100});
+	},
+	ajaxComplete: function(){
+		$('#row-loading-'+this.person.id).fadeOut({duration:100});
+	},
     // populate the html to the dom
     render: function () {
-      this.$el.html(Mustache.to_html($('#row-tpl').html(), this.note.toJSON()));
+      this.$el.html(Mustache.to_html($('#row-tpl').html(), this.person.toJSON()));
       return this;
     },
 
@@ -35,12 +43,12 @@
       // we would call 
       // this.model.destroy();
       // which would make a DELETE call to the server with the id of the item
-      this.notes.remove(this.note);
+      this.persons.remove(this.person);
       this.$el.remove();
     },
 	
 	edit: function(){
-		window.location.hash = "note/"+ this.note.id +"/edit";
+		window.location.hash = "person/"+ this.person.id +"/edit";
 	}
   });
 }());

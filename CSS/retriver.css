@@ -135,13 +135,20 @@ hr {
 	border-radius: 3px;
 	border: 20px solid white;
 }
-#profile-loading{
+#profile-loading, .row-loading{
 	position:absolute;
-	height: 610px;
-	width: 600px;
 	background:  url('../img/spinner-small.gif') no-repeat center center white;
 	z-index:1;
 	opacity: .5;
+	display:none;
+}
+.row-loading{
+	height: 60px;
+	width: 300px;
+}
+#profile-loading{
+	height: 610px;
+	width: 600px;
 }
 #type img{
 	box-shadow: 0 0 3px black;

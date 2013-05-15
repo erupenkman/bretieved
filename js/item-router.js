@@ -5,31 +5,32 @@
 (function () {
   "use strict";
   window.APP = window.APP || {Routers: {}, Collections: {}, Models: {}, Views: {}};
-  APP.Routers.NoteRouter = Backbone.Router.extend({
+  APP.Routers.personRouter = Backbone.Router.extend({
     routes: {
-		"note/new": "create",
-		"note/:id/edit": "edit",
+		"person/new": "create",
+		"person/:id/edit": "edit",
 		"*path": "create" //default
     },
 
     initialize: function (options) {
-		this.notes =  new APP.Collections.NoteCollection();
-		this.notes.fetch({success: (function(){
+		this.persons =  new APP.Collections.personCollection();
+		
+		this.persons.fetch({success: (function(){
 			Backbone.history.start();
-			this.list = new APP.Views.NoteListView({notes: this.notes});
+			this.list = new APP.Views.personListView({persons: this.persons});
 			this.list.render();
 		}).bind(this)});
     },
 	
     create: function () {
 		// two views are managed here
-		this.currentView = new APP.Views.NoteNewView({notes: this.notes, note: new APP.Models.NoteModel()});
+		this.currentView = new APP.Views.personNewView({persons: this.persons, person: new APP.Models.personModel()});
 		$('#primary-content').html(this.currentView.render().el);
     },
 
     edit: function (id) {
-		var note = this.notes.get(id);
-		this.currentView = new APP.Views.NoteEditView({note: note});
+		var person = this.persons.get(id);
+		this.currentView = new APP.Views.personEditView({person: person});
 		$('#primary-content').html(this.currentView.render().el);
     }
 	

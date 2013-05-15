@@ -5,7 +5,7 @@
   "use strict";
 
   window.APP = APP || {Routers: {}, Collections: {}, Models: {}, Views: {}};
-  APP.Models.NoteModel = Backbone.Model.extend({
+  APP.Models.personModel = Backbone.Model.extend({
 	url:"/items", 
     // the default fields
     defaults: {
@@ -21,9 +21,9 @@
   
   // define the collection in the same file
   window.APP.Collections = window.APP.Collections || {};
-  window.APP.Collections.NoteCollection = Backbone.Collection.extend({
+  window.APP.Collections.personCollection = Backbone.Collection.extend({
     // Reference to this collection's model.
 	url:"/items",
-    model: APP.Models.NoteModel
+    model: APP.Models.personModel
   });
 }());

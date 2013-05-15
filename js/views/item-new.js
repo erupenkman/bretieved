@@ -4,7 +4,7 @@
 (function () {
   "use strict";
   window.APP || {Routers: {}, Collections: {}, Models: {}, Views: {}};
-  APP.Views.NoteNewView = Backbone.View.extend({
+  APP.Views.personNewView = Backbone.View.extend({
     // functions to fire on events
     events: {
       "click #save-button": "save"
@@ -12,8 +12,8 @@
 
     // the constructor
     initialize: function (options) {
-      this.note  = options.note;
-      this.notes = options.notes;
+      this.person  = options.person;
+      this.persons = options.persons;
     },
 
     save: function (event) {
@@ -23,14 +23,14 @@
 		var allValues = [];
 		$('#details input').each(function() { allValues.push($(this).val()) })
 		// update our model with values from the form
-		this.note.set({
+		this.person.set({
 			name: $('#name').val(),
 			detail: allValues
 		});
-		this.notes.add(this.note);
+		this.persons.add(this.person);
 		// we would save to the server here with 
-		this.note.save(null, {success: function(obj) {
-			window.location.hash = "note/"+ obj.id +"/edit";
+		this.person.save(null, {success: function(obj) {
+			window.location.hash = "person/"+ obj.id +"/edit";
 		}});
 		// which would return it with an id, so we fake it and just set it
 		// redirect back to the index
@@ -40,7 +40,7 @@
 
     // populate the html to the dom
     render: function () {
-      this.$el.html(Mustache.to_html($('#edit-tpl').html(), this.note.toJSON()));
+      this.$el.html(Mustache.to_html($('#edit-tpl').html(), this.person.toJSON()));
       return this;
     }
   });
