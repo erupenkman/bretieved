@@ -9,8 +9,10 @@
 	url:"/items", 
     // the default fields
     defaults: {
-      name: "Untitled",
-      detail: ["Phone", ""],
+      name: "New Contact",
+      detail: ["Phone", "",
+		"Email addres", "",
+		"Account Number", ""],
     },
     // the constructor
     initialize: function (options) {

@@ -30,7 +30,6 @@
 		this.notes.add(this.note);
 		// we would save to the server here with 
 		this.note.save(null, {success: function(obj) {
-			console.log(obj);
 			window.location.hash = "note/"+ obj.id +"/edit";
 		}});
 		// which would return it with an id, so we fake it and just set it
