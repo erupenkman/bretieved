@@ -6,27 +6,61 @@
 	
 	<script language="javascript" type="text/javascript" src="js/lib/jquery-1.8.0.min.js"></script> 
 	<script language="javascript" type="text/javascript" src="js/lib/mustache.js"></script> 
-	<script language="javascript" type="text/javascript" src="js/retriver.js"></script> 
-	<script id="person-tpl" type="text/template">
-		<li id="{{domId}}">
+	<script language="javascript" type="text/javascript" src="js/lib/underscore.min.js"></script> 
+	<script language="javascript" type="text/javascript" src="js/lib/backbone-min.js"></script> 
+	<script language="javascript" type="text/javascript" src="js/lib/bootstrap.min.js"></script> 
+	
+	<script language="javascript" type="text/javascript" src="js/item-router.js"></script> 
+	<script language="javascript" type="text/javascript" src="js/models/item-model.js"></script> 
+	<script language="javascript" type="text/javascript" src="js/views/item-edit.js"></script> 
+	<script language="javascript" type="text/javascript" src="js/views/item-new.js"></script> 
+	<script language="javascript" type="text/javascript" src="js/views/item-row.js"></script> 
+	<script language="javascript" type="text/javascript" src="js/views/item-list.js"></script> 
+
+	<!--<script language="javascript" type="text/javascript" src="js/views/item-row.js"></script> -->
+	<script id="row-tpl" type="text/template">
+		<li id="{{id}}">
 			<img src="img/00{{img}}.jpg">
-			<div id="name-{{domId}}" class="listlabel" title="{{name}}">{{name}}</div>
+			<div id="name-{{id}}" class="listlabel" title="{{name}}">{{name}}</div>
 		</li>
+	</script>
+	<!-- #details identifies the array {{.}} is an item in the array -->
+	<script id="edit-tpl" type="text/template">
+		<div id="profileid">
+			<input id="name" value="{{name}}" placeholder="New contact"/>
+		</div>
+		<div id="type"> 
+			<img src="img/00.jpg">
+			<div id="type1">
+			</div>
+			<div id="type2">
+				<a href="index.php"> <h5> Client </h5> </a>
+			</div>
+		</div>
+		<div id="profilelables">
+			
+		</div>
+		<div id="edit-details">
+			<div id="details">
+				{{#detail}}
+					<input value="{{.}}"/>
+				{{/detail}}
+			</div>
+			<div class="buttons">
+				<a href="#" id="save-button" class="big-button" >Save</a>
+			</div>
+		</div>
 	</script>
 	<script id="person-details-tpl" type="text/template">
 		<input value="{{value}}"/>
 	</script>
 	</head>
 	<body marginwidth="0" marginheight="0 leftmargin=" topmargin="0" 0"="">
-		<div id="search">
-			<ul>
-				<li> <input id="search_input" type="text" value=""> </li>
-				<li> <div id="search_data"> <img src="img/search.gif"> </div> </li>
-				<li> <div id="add-new"> <img src="img/add.gif"> </div> </li>
-			</ul>
-		</div>
+		<div id="background"> </div>
 		<div id="body">
 			<div id="profile">
+				<div id="primary-content"></div>
+			<!--
 				<div id="profile-loading">
 				</div>
 				<div id="profileid">
@@ -41,84 +75,22 @@
 					</div>
 				</div>
 				<div id="profilelables">
-					<input/>
-					<input/>
-					<input/>
-					<input/>
-					<input/>
-					<input/>
-					<input/>
-					<input/>
-					<input/>
-					<input/>
-					<input/>
-					<input/>
-					<input/>
-					<input/>
-					<input/>
-					<input/>
-					<input/>
-					<input/>
-					<input/>
-					<input/>
+					
 				</div>
 				<div id="edit-details">
 					<div id="details">
-						<input/>
-						<input/>
-						<input/>
-						<input/>
-						<input/>
-						<input/>
-						<input/>
-						<input/>
-						<input/>
-						<input/>
-						<input/>
-						<input/>
-						<input/>
-						<input/>
-						<input/>
-						<input/>
-						<input/>
-						<input/>
-						<input/>
-						<input/>
-						<input/>
-						<input/>
-						<input/>
-						<input/>
-						<input/>
-						<input/>
-						<input/>
-						<input/>
-						<input/>
-						<input/>
-						<input/>
-						<input/>
-						<input/>
-						<input/>
-						<input/>
-						<input/>
-						<input/>
-						<input/>
-						<input/>
-						<input/>
-						<input/>
-						<input/>
-						<input/>
-						<input/>
-						<input/>
-						<input/>
-						<input/>
-						<input/>
 					</div>
 					<div class="buttons">
 						<a href="#" id="save-button" class="big-button" >Save</a>
 					</div>
-				</div>
+				</div>-->
 			</div>
 			<div id="listofprofile">
+				<ul id="search">
+					<li> <input id="search_input" type="text" value=""> </li>
+					<li> <div id="search_data"> <img src="img/search.gif"> </div> </li>
+					<li> <div id="add-new"> <img src="img/add.gif"> </div> </li>
+				</ul>
 				<div id="listbox">
 					<ul id="listboxul">
 						<!--<a href="#" id="add-new-list" class="big-button" >Add</a>-->
@@ -128,4 +100,13 @@
 			</div>
 		</div>
 	</body>
+		<script language="javascript" type="text/javascript" >
+	/*go backbone go*/
+// we manually pass in the initial data, but this would be called with a collection.fetch() normally
+
+var router = new APP.Routers.NoteRouter();
+
+
+
+	</script>
 </html>
