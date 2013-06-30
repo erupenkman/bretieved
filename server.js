@@ -11,24 +11,8 @@ var express = require('express'),
   path = require('path'),
   url = require('url'),
   ElasticSearchClient = require('elasticsearchclient');
-var mongoose = require('mongoose'),
-  Schema = mongoose.Schema;
-
-var ItemSchema = new Schema({
-	name: String, 
-	detail: [], 
-	created : { type : Date, default: Date.now } 
-});
-var Item = mongoose.model('Item', ItemSchema);
-ItemSchema.virtual('id').get(function(){
-    return this._id.toHexString();
-});
-
-// Ensure virtual fields are serialised.
-ItemSchema.set('toJSON', {
-    virtuals: true
-});
-
+var mongoose = require('mongoose');
+var Item = mongoose.model('Item', {name: String, detail: [], created : { type : Date, default: Date.now } });
 var serverUrl =  url.parse(process.env.SEARCHBOX_URL || 'http://localhost:9200');
 console.log(serverUrl);
 var serverOptions = {
@@ -38,9 +22,6 @@ var serverOptions = {
 
 var elasticSearchClient = new ElasticSearchClient(serverOptions);
 
-	var _index = 'item';
-	var _type = 'document';
-	
 var app = express();
 
 //remember mongoJs is different from mongoose
@@ -67,7 +48,7 @@ app.get('/', function(req, res){
 	res.render('retriver-template.html');
 });
 //post to item adds by default
-app.post('/items', function(req, res){
+app.post('/add', function(req, res){
 	console.log(req.body);
 	
 	//todo: only add to the database if it is indexed by elasticsearch and vice versa
@@ -79,7 +60,7 @@ app.post('/items', function(req, res){
 				console.log(err);
 			}
 			else{	
-				res.json( {"id":item._id});
+				res.json( {dbId: item._id});
 				res.end();
 				
 				var commands = [];
@@ -106,10 +87,8 @@ app.post('/items', function(req, res){
 	);
 });
 
-//update the item with json contained in the request body
-app.put('/items', function(req, res){
-	var id = req.body.id;
-	Item.findById(id, function (error, item) {
+app.put('/items/:dbId', function(req, res){
+	Item.findById(req.params.dbId, function (error, item) {
 		if(!error){
 		item.name = req.body.name;
 			item.detail = req.body.detail;
@@ -120,6 +99,8 @@ app.put('/items', function(req, res){
 					res.end();
 					
 					var commands = [];
+					var _index = 'item';
+					var _type = 'document';
 					commands.push({ 
 						"index":{
 							"_index":_index, 
@@ -150,7 +131,7 @@ app.put('/items', function(req, res){
 app.get('/items/:dbId', function(req, res){
 	Item.findById(req.params.dbId, function (err, item) {
 		if (!err) {
-			res.send(item.toClient());
+			res.send(item);
 		} else {
 			console.log(err);
 		}
@@ -158,6 +139,7 @@ app.get('/items/:dbId', function(req, res){
 });
 
 app.get('/items', function(req, res){
+console.log('get all');
 	Item.find({},function (err, items) {
 		if (!err) {
 			res.send(items);
@@ -167,29 +149,8 @@ app.get('/items', function(req, res){
 	});
 });
 
-app.get('/search/:query', function(req, res){
-console.log(req.params.query);
-//note this is failing
-	var qryObj = {
-        "match_all" : {}
-	}
-	elasticSearchClient.search(_index, _type, qryObj)
-		.on('data', function(data) {
-			console.log(JSON.parse(data))
-			res.json(data);
-			res.end();
-		})
-		.on('done', function(){
-			//always returns 0 right now
-		})
-		.on('error', function(error){
-			console.log(error)
-		})
-		.exec();
-	
-});
 
 http.createServer(app).listen(app.get('port'), function(){
-  console.log("Express server now listening on port " + app.get('port'));
+  console.log("Express server listening on port " + app.get('port'));
 });
 

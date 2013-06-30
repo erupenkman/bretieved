@@ -1,17 +1,7 @@
 var peopleArray = new Array();
 var personDomId = 1;
 var openPerson;
-var NUM_FIELDS = 30;
-
-
-
-
-/*********/
-
-
-
-
-
+var NUM_FIELDS = 20;
 /** Only works with dbId*/
 Array.prototype.containsPerson = function ( openPerson ) {
 	if(openPerson === undefined || openPerson.domId === undefined){
@@ -40,8 +30,6 @@ function stopSpinner(){
 
 $(document).ready( function(){
 	getItems();
-	showItem('',new Array(NUM_FIELDS));
-	search('match_all');
 	$('#profile-loading').hide();
 	
 	$('#add-new').click( function(){
@@ -52,11 +40,7 @@ $(document).ready( function(){
 		openPerson = undefined;
 		stopSpinner();
 	});
-	$('#details').keypress(function(e){
-		if(e.which === 13){
-			$('#save-button').click();
-		}
-	});
+	
 	$('#save-button').click(function(){
 		var allValues = [];
 		$('#details input').each(function() { allValues.push($(this).val()) });
@@ -96,24 +80,6 @@ function getItems(){
 			for(i=0; i< res.length; i++){
 				 new Person(res[i]._id, res[i].name);
 			}
-		} ,
-		error: function(res){
-			console.log("lose"); 
-			console.log(res);
-		}
-	}); 
-}
-
-function search(query){
-	$.ajax({  
-		//Get shalt have no effect and be safe to crawl
-		type: "GET",  
-		url: "/search/" + query,  
-		dataType: 'json',
-		contentType:'application/json',
-		success: function (res) {
-			console.log('search done');
-			console.log(res);
 		} ,
 		error: function(res){
 			console.log("lose"); 
