@@ -4,13 +4,13 @@
 (function () {
   "use strict";
   window.APP = window.APP || {Routers: {}, Collections: {}, Models: {}, Views: {}};
-  APP.Views.NoteListView = Backbone.View.extend({
+  APP.Views.personListView = Backbone.View.extend({
     // the constructor
     initialize: function (options) {
       // model is passed through
-      this.notes = options.notes;
-      this.notes.bind('reset', this.addAll, this);
-	  this.notes.bind('add', this.addOne, this);
+      this.persons = options.persons;
+      this.persons.bind('reset', this.addAll, this);
+	  this.persons.bind('add', this.addOne, this);
     },
 
     // populate the html to the dom
@@ -22,11 +22,11 @@
     addAll: function () {
       // clear out the container each time you render index
 	  $('#listboxul').html(" ");
-      _.each(this.notes.models, $.proxy(this, 'addOne'));
+      _.each(this.persons.models, $.proxy(this, 'addOne'));
     },
 
-    addOne: function (note) {	
-      var view = new APP.Views.NoteRowView({notes: this.notes, note: note});
+    addOne: function (person) {	
+      var view = new APP.Views.personRowView({persons: this.persons, person: person});
       $('#listboxul').prepend(view.render().el);
     }
   });
