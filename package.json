@@ -19,6 +19,7 @@
   },
   "devDependencies": {
     "grunt": "~0.4.1",
-    "grunt-nodemon": "~0.1.2"
+    "grunt-nodemon": "~0.1.2",
+	"bower":""
   }
 }
