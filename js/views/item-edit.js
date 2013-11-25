@@ -7,7 +7,8 @@
   APP.Views.personEditView = Backbone.View.extend({
     // functions to fire on events
     events: {
-      "click #save-button": "save"
+      "click #save-button": "save",
+      "click #add-field": "addField"
     },
 
     // the constructor
@@ -15,6 +16,7 @@
       this.person  = options.person;
 	  this.person.bind('request', this.ajaxStart, this);
 	  this.person.bind('sync', this.ajaxComplete, this);
+	  this.person.bind('change', this.render, this);
     },
 	ajaxStart: function(arg1,arg2,arg3){
 		//start spinner
@@ -23,7 +25,18 @@
 	ajaxComplete: function(){
 		$('#profile-loading').fadeOut({duration:100});
 	},
-	
+	addField: function(event){
+		event.stopPropagation();
+		event.preventDefault();
+		var allDetail = this.person.get('detail');
+		allDetail.push("");
+		allDetail.push("");
+		this.person.set({
+			detail: allDetail
+		});
+		this.person.trigger("change");
+		this.person.trigger("change:detail");
+	},
 	save: function (event) {
       event.stopPropagation();
       event.preventDefault();

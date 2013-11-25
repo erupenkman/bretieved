@@ -25,7 +25,7 @@ module.exports = function (grunt) {
 			}
 		}
     });
-
+	
     grunt.registerTask('server', function (target) {
         return grunt.task.run([
 			'nodemon'
