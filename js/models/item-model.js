@@ -20,8 +20,17 @@
   // define the collection in the same file
   window.APP.Collections = window.APP.Collections || {};
   window.APP.Collections.personCollection = Backbone.Collection.extend({
-    // Reference to this collection's model.
+	// Reference to this collection's model.
 	url:"/items",
-    model: APP.Models.personModel
+	model: APP.Models.personModel,
+
+	setSelected: function(selectedPerson){
+		if (this.selectedPerson) {
+			this.selectedPerson.set({selected:false});
+		}
+		selectedPerson.set({selected:true});
+		this.selectedPerson = selectedPerson;
+	}
+	
   });
 }());

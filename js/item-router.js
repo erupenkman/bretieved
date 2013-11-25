@@ -24,12 +24,23 @@
 	
     create: function () {
 		// two views are managed here
-		this.currentView = new APP.Views.personNewView({persons: this.persons, person: new APP.Models.personModel()});
-		$('#primary-content').html(this.currentView.render().el);
+		var person = new APP.Models.personModel();
+		var self = this;
+		person.save(null, {success: function(obj) {
+			window.location.hash = "person/"+ obj.id +"/edit";
+			self.persons.add(obj);
+			self.persons.setSelected(obj);
+			self.currentView = new APP.Views.personNewView({persons: self.persons, person: obj});
+			
+			$('#primary-content').html(self.currentView.render().el);
+			
+		}});
+		
     },
 
     edit: function (id) {
 		var person = this.persons.get(id);
+		this.persons.setSelected( person);
 		this.currentView = new APP.Views.personEditView({person: person});
 		$('#primary-content').html(this.currentView.render().el);
     }
