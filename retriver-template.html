@@ -31,26 +31,28 @@
 		<div id="profileid">
 			<input id="name" value="{{name}}" placeholder="New contact"/>
 		</div>
-		<div id="type"> 
-			<img src="img/00.jpg">
-			<div id="type1">
+		<div class="edit-content">
+			<div id="profilelables">
+				<img class="profile-img" src="img/00.jpg">
+				<div id="type1">
+				</div>
+				<div id="type2">
+					<a href="index.php"> <h5> Client </h5> </a>
+				</div>
 			</div>
-			<div id="type2">
-				<a href="index.php"> <h5> Client </h5> </a>
+			<div id="edit-details">
+				<div id="details">
+					{{#detail}}
+						<input value="{{.}}"/>
+					{{/detail}}
+				</div>
 			</div>
 		</div>
-		<div id="profilelables">
-			
-		</div>
-		<div id="edit-details">
-			<div id="details">
-				{{#detail}}
-					<input value="{{.}}"/>
-				{{/detail}}
-			</div>
-			<div class="buttons">
+		<div class="clearfix"></div>
+		<div class="buttons">
+			<span class="buttons-right">
 				<a href="#" id="save-button" class="big-button" >Save</a>
-			</div>
+			</span>
 		</div>
 	</script>
 	<script id="person-details-tpl" type="text/template">

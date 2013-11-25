@@ -30,8 +30,6 @@
 			window.location.hash = "person/"+ obj.id +"/edit";
 			self.persons.add(obj);
 			self.persons.setSelected(obj);
-			self.currentView = new APP.Views.personNewView({persons: self.persons, person: obj});
-			
 			$('#primary-content').html(self.currentView.render().el);
 			
 		}});
@@ -40,6 +38,9 @@
 
     edit: function (id) {
 		var person = this.persons.get(id);
+		if(!person){
+			window.location.hash = "create";
+		}
 		this.persons.setSelected( person);
 		this.currentView = new APP.Views.personEditView({person: person});
 		$('#primary-content').html(this.currentView.render().el);

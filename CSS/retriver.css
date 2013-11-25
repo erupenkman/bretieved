@@ -150,10 +150,9 @@ hr {
 	height: 610px;
 	width: 600px;
 }
-#type img{
+.profile-img{
 	box-shadow: 0 0 3px black;
 	height: 125px;
-	margin: 15px;
 	width: 110px;
 	position: absolute;
 }
@@ -161,7 +160,6 @@ hr {
 	background-color: darkslategray;
     height: 60px;
     width: 600px;
-	position: absolute;
 	border-radius: 5px 5px 0 0;
 }
 #name {
@@ -174,25 +172,21 @@ hr {
     width: 420px;
 	margin-top: 2px;
 }
-#type {
+#type1, #type2{
 	position: absolute;
+	width: 110px;
+	margin-top: 103px;
+    height: 22px;
 }
 
 #type1 {
 	background-color: black;
 	height: 22px;
-	margin-top: 118px;
+	margin-top: 103px;
 	opacity: 0.5;
 	position: absolute;
-    width: 112px;
-	margin-left: 14px;
 }
-#type2 {
-	margin-top: 118px;
-	width: 110px;
-	position: absolute;
-	margin-left: 15px;
-}
+
 h5 {
 	margin: 0;
 	padding: 2px;
@@ -207,19 +201,18 @@ a {
 }
 #type2:hover {
 	background-color: black;
-    height: 22px;
-    margin-top: 118px;
     opacity: 1; 
-    width: 110px;
-	margin-left: 15px;
 
 }
 #profilelables {
 	float: left;
-	height: 480px;
 	width: 120px;
-	padding: 0 5px 5px 15px;
-	margin-top: 148px;
+	padding: 0 5px 5px 0;
+	margin: -45px 0 0 0;
+}
+.edit-content{
+	margin: 0 15px;
+	height: 480px;
 }
 #profilelables input {
 	width: 110px;
@@ -254,11 +247,16 @@ input {
 #edit-details {
 	background-color: transparent;
     float: right;
-    margin-top: 78px;
-    width: 450px;
+    margin-top: 20px;
+    width: 435px;
 }
+
+.buttons-right{
+	float: right;
+}
+
 .buttons {
-	padding:20px 0;
+	padding: 20px 30px;
 }
 .big-button{
 	-moz-box-shadow: inset 0px 1px 0px 0px #818181;
@@ -288,4 +286,8 @@ input {
 	background:-moz-linear-gradient( center top, #595959 5%, #818181 100% );
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#595959', endColorstr='#818181');
 	background-color:#595959;
+}
+
+.clearfix{
+	clear:both;
 }
