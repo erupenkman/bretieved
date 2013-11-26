@@ -28,6 +28,8 @@
 	addField: function(event){
 		event.stopPropagation();
 		event.preventDefault();
+		
+		this._readUserInput();
 		var allDetail = this.person.get('detail');
 		allDetail.push("");
 		allDetail.push("");
@@ -36,22 +38,27 @@
 		});
 		this.person.trigger("change");
 		this.person.trigger("change:detail");
+		
+		this.person.save();
 	},
 	save: function (event) {
-      event.stopPropagation();
-      event.preventDefault();
-	  
-		var allValues = [];
-	  $('#details input').each(function() { allValues.push($(this).val()) })
-      // update our model with values from the form
-      this.person.set({
-        name: $('#name').val(),
-        detail: allValues
-      });
-      // we would save to the server here with 
-      this.person.save();
-      // redirect back to the index
+		event.stopPropagation();
+		event.preventDefault();
+
+		this._readUserInput()
+		// we would save to the server here with 
+		this.person.save();
+		// redirect back to the index
     },
+	_readUserInput: function(){
+		var allValues = [];
+		$('#details input').each(function() { allValues.push($(this).val()) })
+		// update our model with values from the form
+		this.person.set({
+			name: $('#name').val(),
+			detail: allValues
+		});
+	},
 
     // populate the html to the dom
     render: function () {

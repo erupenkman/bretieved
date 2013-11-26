@@ -250,6 +250,9 @@ input {
     margin-top: 20px;
     width: 435px;
 }
+.icon-add{
+color:#AAAADD;
+}
 
 .buttons-right{
 	float: right;
