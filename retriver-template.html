@@ -42,7 +42,10 @@
 			<div id="edit-details">
 				<div id="details">
 					{{#detail}}
-						<input value="{{.}}"/>
+						<div class="field">
+							<input class="label" value="{{label}}"/>
+							<input class="value" value="{{value}}"/>
+						</div>
 					{{/detail}}
 					<div class="buttons">
 						<span class="buttons-right">

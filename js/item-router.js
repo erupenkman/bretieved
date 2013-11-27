@@ -27,11 +27,8 @@
 		var person = new APP.Models.personModel();
 		var self = this;
 		person.save(null, {success: function(obj) {
-			window.location.hash = "person/"+ obj.id +"/edit";
 			self.persons.add(obj);
-			self.persons.setSelected(obj);
-			$('#primary-content').html(self.currentView.render().el);
-			
+			window.location.hash = "person/"+ obj.id +"/edit";
 		}});
 		
     },
@@ -40,6 +37,7 @@
 		var person = this.persons.get(id);
 		if(!person){
 			window.location.hash = "create";
+			return;
 		}
 		this.persons.setSelected( person);
 		this.currentView = new APP.Views.personEditView({person: person});

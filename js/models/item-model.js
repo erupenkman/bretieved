@@ -10,11 +10,30 @@
     // the default fields
     defaults: {
       name: "Untitled",
-      detail: ["Phone", ""],
+      detail: [
+		{	label: 'Phone',
+			value: ''
+		},
+		{	
+			label: 'Notes',
+			value: ''
+		}
+	  ],
     },
     // the constructor
     initialize: function (options) {
-    }
+    },
+	
+	/*adds the detail and raises the change event*/
+	addDetail: function(detail){
+		var allDetail = this.get('detail');
+		allDetail.push(detail);
+		this.set({
+			detail: allDetail
+		});
+		this.trigger("change");
+		this.trigger("change:detail");
+	}
   });
   
   // define the collection in the same file

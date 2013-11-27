@@ -30,14 +30,10 @@
 		event.preventDefault();
 		
 		this._readUserInput();
-		var allDetail = this.person.get('detail');
-		allDetail.push("");
-		allDetail.push("");
-		this.person.set({
-			detail: allDetail
+		this.person.addDetail({
+			label: '',
+			value: ''
 		});
-		this.person.trigger("change");
-		this.person.trigger("change:detail");
 		
 		this.person.save();
 	},
@@ -52,7 +48,12 @@
     },
 	_readUserInput: function(){
 		var allValues = [];
-		$('#details input').each(function() { allValues.push($(this).val()) })
+		$('#details .field').each(function() { 
+			allValues.push({
+				label: $(this).find('.label').val(),
+				value: $(this).find('.value').val()
+			});
+		});
 		// update our model with values from the form
 		this.person.set({
 			name: $('#name').val(),

@@ -14,9 +14,13 @@ var express = require('express'),
 var mongoose = require('mongoose'),
   Schema = mongoose.Schema;
 
+var fieldSchema = new Schema({
+	label: String,
+	value: String
+});
 var ItemSchema = new Schema({
 	name: String, 
-	detail: [], 
+	detail: [fieldSchema], 
 	created : { type : Date, default: Date.now } 
 });
 var Item = mongoose.model('Item', ItemSchema);
@@ -119,6 +123,7 @@ app.put('/items', function(req, res){
 					res.json( {dbId: item._id});
 					res.end();
 					
+					// now we can worry about indexing with elasticsearch
 					var commands = [];
 					commands.push({ 
 						"index":{
