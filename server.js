@@ -3,7 +3,6 @@
  * Module dependencies.
  */
 
-;// the console of awesome 
 
 var express = require('express'),
   logger = require('node-codein'),

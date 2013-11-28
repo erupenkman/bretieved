@@ -21,7 +21,7 @@
 			this.list.render();
 		}).bind(this)});
     },
-	
+	//TODO: all urls should be 
     create: function () {
 		// two views are managed here
 		var person = new APP.Models.personModel();
@@ -30,7 +30,6 @@
 			self.persons.add(obj);
 			window.location.hash = "person/"+ obj.id +"/edit";
 		}});
-		
     },
 
     edit: function (id) {
