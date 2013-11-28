@@ -6,6 +6,10 @@
 	margin-top: 103px;
 	height: 22px;
 }
+.horizontal-pad{
+	margin-left: 30px;
+	margin-right: 30px;
+}
 
 /**Scafolding **/
 body {
@@ -19,20 +23,28 @@ body {
 	border: 20px solid white;
 }
 
-.vertical-margin{
-	margin-top: 30px;
+.edit-content{
+	.horizontal-pad;
+	margin-top: 60px;
+}
+
+.edit-detail{
+	min-height: 480px;
 	margin-bottom: 30px;
 }
 
 /** Modules **/
-.profileid {
+.profile-title {
 	background-color: darkslategray;
     height: 60px;
 	border-radius: 5px 5px 0 0;
+	.profile-title-inner{
+		.horizontal-pad;
+	}
 	input {
 		color: #F5F5F5;
 		font-size: 24px;
-		margin-left: 160px;
+		width: 100%;
 		padding: 12px 5px 2px 10px;
 	}
 }
@@ -66,11 +78,7 @@ body {
 }
 
 
-.edit-content{
-	margin-top: 60px;
-	height: 480px;
-}
-	
+
 #search li {
 	float: left;
 }	

@@ -48,10 +48,10 @@
     },
 	_readUserInput: function(){
 		var allValues = [];
-		$('#details .field').each(function() { 
+		$('#details .text-field').each(function() { 
 			allValues.push({
-				label: $(this).find('.label').val(),
-				value: $(this).find('.value').val()
+				label: $(this).find('.form-label').val(),
+				value: $(this).find('.form-control').val()
 			});
 		});
 		// update our model with values from the form
